@@ -6,7 +6,6 @@ var Mail;
 var Addr;
 var Phone;
 var level;
-var totalPrice;
 //註冊同意書
 var flag_recheckbox = false;
 //註冊內容格式
@@ -181,9 +180,9 @@ $(function () {
 
         // 判斷登入狀態為 Ture 作 Toast 顯示
         if (data.state == true) {
-          $("#toast_windows").removeClass("d-none");
+          $("#login_toast_windows").removeClass("d-none");
         } else {
-          $("#toast_windows").addClass("d-none");
+          $("#login_toast_windows").addClass("d-none");
         }
       },
       error: function () {
@@ -225,6 +224,7 @@ $(function () {
     console.log(data);
     console.log('test condition:', data.state);
 
+    
     // 全域變數
     USERID = data.data[0].ID;
     Username = data.data[0].userName;
@@ -232,14 +232,13 @@ $(function () {
     Mail = data.data[0].userMail;
     Addr = data.data[0].userAddr;
     Phone = data.data[0].userPhone;
-    totalPrice = data.data[0].Total;
     level = data.data[0].Level;
 
     if (data.state) {
       //帳號被啟用
       if (data.data[0].userState == "Y") {
         //登入成功
-        alert(data.message);
+        // alert(data.message);
 
         //將uid01存入cookie
         setCookie("uid01", data.data[0].Uid, 7);
@@ -288,6 +287,7 @@ $(function () {
   function logout() {
     setCookie("uid01", "", 7);
     setCookie("level", " ", 7);
-    location.href ="index.html";
+    alert("登出成功");
+    location.href = "index.html";
   }
 });
